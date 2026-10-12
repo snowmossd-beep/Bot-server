@@ -1,8 +1,8 @@
 const mineflayer = require('mineflayer')
 
-const host = process.env.MC_HOST
-const port = parseInt(process.env.MC_PORT || '25565')
-const version = process.env.MC_VERSION || false
+const host = process.env.MC_HOST || 'minhnguvcl.aternos.me'
+const port = parseInt(process.env.MC_PORT || '47047')
+const version = process.env.MC_VERSION || '1.21'
 const username = process.env.MC_USER || 'AFK_Bot'
 const auth = process.env.MC_AUTH || 'offline'
 
