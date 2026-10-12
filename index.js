@@ -8,14 +8,17 @@ const auth = process.env.MC_AUTH || 'offline'
 
 function start() {
   const bot = mineflayer.createBot({ host, port, username, version, auth })
+  bot.physicsEnabled = false
   let timer
 
   bot.once('spawn', () => {
     console.log('joined')
+    let i = 0
     timer = setInterval(() => {
-      bot.setControlState('jump', true)
-      setTimeout(() => bot.setControlState('jump', false), 300)
-      bot.look(Math.random() * Math.PI * 2, (Math.random() - 0.5) * Math.PI / 2, true)
+      try {
+        bot.swingArm('right')
+        bot.setQuickBarSlot(i++ % 9)
+      } catch (e) {}
     }, 15000)
   })
 
@@ -25,7 +28,7 @@ function start() {
     setTimeout(start, 20000)
   })
 
-  bot.on('kicked', reason => console.log('kicked', reason))
+  bot.on('kicked', reason => console.log('kicked', JSON.stringify(reason)))
   bot.on('error', err => console.log('error', err.message))
 }
 
